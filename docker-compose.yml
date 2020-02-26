@@ -1,0 +1,29 @@
+version: "3.1"
+services:
+    mongodb:
+        image: mongo:latest
+        container_name: google-books-db
+        ports:
+            - "27017:27017"
+    backend:
+        image: google-books-server:latest
+        container_name: google-books-backend
+        build: ./app/
+        ports:
+            - "6200:6200"
+        volumes:
+            - ./app:/usr/src/app
+        links:
+            - mongodb
+        depends_on:
+            - mongodb
+    frontend:
+        image: google-books-client:latest
+        container_name: google-books-frontend
+        build: ./client/
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./client:/usr/src/app
+        depends_on:
+            - backend
