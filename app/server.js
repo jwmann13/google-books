@@ -8,7 +8,7 @@ const MongoStore = require("connect-mongo")(session);
 
 const routes = require("./routes");
 
-const morgan = require("morgan");
+const morgan = require("morgan"); 
 
 app.use(morgan("dev"));
 
