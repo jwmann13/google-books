@@ -1,7 +1,7 @@
 {
-  "name": "mern",
+  "name": "google-books-backend",
   "version": "1.0.0",
-  "description": "Mern Demo",
+  "description": "Backend Package file",
   "main": "server.js",
   "scripts": {
     "start": "nodemon ./server.js -exec babel-node -e js",

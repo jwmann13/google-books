@@ -1,0 +1,20 @@
+{
+  "name": "google-books",
+  "version": "1.0.0",
+  "description": "## About This Boilerplate",
+  "main": "index.js",
+  "scripts": {
+    "install": "cd ./app && npm i && cd ../client && npm i"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwmann13/google-books.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jwmann13/google-books/issues"
+  },
+  "homepage": "https://github.com/jwmann13/google-books#readme"
+}
