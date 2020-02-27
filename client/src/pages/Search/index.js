@@ -1,11 +1,15 @@
 import React from "react";
-import API from "../../utils/API";
+
+import { BookContainer, SearchBar } from "../../components";
 
 function Search() {
-  API.getBooks()
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-  return <h1>SEARCH</h1>;
+  return (
+    <>
+      <h1> SEARCH</h1>
+      <SearchBar />
+      <BookContainer/>
+    </>
+  );
 }
 
 export default Search;
