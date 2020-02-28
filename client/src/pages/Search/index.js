@@ -1,12 +1,11 @@
 import React from "react";
 
-import { BookContainer, SearchBar } from "../../components";
+import { BookContainer } from "../../components";
 
 function Search() {
   return (
     <>
       <h1> SEARCH</h1>
-      <SearchBar />
       <BookContainer/>
     </>
   );
