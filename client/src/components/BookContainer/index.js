@@ -20,13 +20,15 @@ function BookContainer() {
       }
     });
   } else {
-    bookCards = []
+    bookCards = [];
   }
 
   return (
     <div className="container">
-      <div className="row"><SearchBar setBooks={setBooks}/></div>
-      <div className="row">{bookCards}</div>
+      <div className="row">
+        <SearchBar setBooks={setBooks} />
+      </div>
+      <div className="card-group">{bookCards}</div>
     </div>
   );
 }

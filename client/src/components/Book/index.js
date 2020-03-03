@@ -1,26 +1,32 @@
 import React from "react";
 
+import ReadMore from "../ReadMore";
 import "./index.css";
 
 function Book(props) {
+  const { title, image, authors, description, link } = props.children;
+  let authorStr = "";
+  if (authors) authorStr = authors !== [] ? authors.join(", ") : "no listed authors!";
+  else authorStr = "no listed authors!";
+
   return (
-    <div className="col-4 p-0 d-flex align-items-stretch">
+    // <div className="col p-0">
       <div className="card">
-        <div className="card-header text-center">
-          <h1 className="display-6">{props.children.title}</h1>
+        <div className="card-header d-flex align-items-center justify-content-center">
+          <h1 className="display-6">{title}</h1>
         </div>
-        <img src={props.children.image} alt="book" className="" />
+        <img src={image} alt="book" className="card-img-top" />
         <div className="card-body">
           <h5 className="card-title display-6 text-muted">
-            by {props.children.authors.join(", ")}
+            by {authorStr}
           </h5>
-          <p className="card-body">{props.children.description}</p>
-          <a href={props.children.link} className="card-link">
+          <ReadMore>{description}</ReadMore>
+          <a href={link} className="card-link">
             Link
           </a>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 
