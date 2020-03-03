@@ -1,13 +1,14 @@
 const axios = require("axios").default;
+const API_KEY = process.env.GOOGLE_API_KEY
 
 getFromAPI = (req, res) => {
   const { q, author } = req.query;
   let queryStr = "";
 
   if (author)
-    queryStr = `https://www.googleapis.com/books/v1/volumes?q=${q}+inauthor:${author}&key=AIzaSyDglSy-LE_wHdT5Xv44AGCYINrsSQ_1e3A`;
+    queryStr = `https://www.googleapis.com/books/v1/volumes?q=${q}+inauthor:${author}&key=${API_KEY}`;
   else
-    queryStr = `https://www.googleapis.com/books/v1/volumes?q=${q}&key=AIzaSyDglSy-LE_wHdT5Xv44AGCYINrsSQ_1e3A`;
+    queryStr = `https://www.googleapis.com/books/v1/volumes?q=${q}&key=${API_KEY}`;
 
   axios
     .get(queryStr)

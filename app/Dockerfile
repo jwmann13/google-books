@@ -1,8 +1,12 @@
 FROM node:latest
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
 
-RUN npm install -g nodemon
+WORKDIR /app
 
-EXPOSE 3000
+COPY package*.json /app/
+
+RUN npm install
+
+COPY . /app/
+
+EXPOSE 6200
 CMD [ "npm", "start" ]

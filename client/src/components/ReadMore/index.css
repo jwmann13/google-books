@@ -1,0 +1,10 @@
+p a.readmore {
+    color: #007bff!important;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+p a.readmore:hover {
+    color: #0056b3!important;
+    cursor: pointer;
+}
