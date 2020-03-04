@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 const emailValidator = require("email-validator");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const SALT_ROUNDS = 12;
 
 const UserSchema = new Schema({
@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     type: Schema.Types.String,
     required: true,
     validate: {
-      validator: emailValidator,
+      validator: emailValidator.validate,
       message: props => `${props.value} is not a valid Email Address`
     }
   },
