@@ -7,5 +7,8 @@ export default {
   getSearch(searchQuery) {
     const { q } = searchQuery
     return axios.get(`/api/search/?q=${q}`)
+  },
+  createUser(newUser) {
+    return axios.post("/api/user/", newUser)
   }
 };
