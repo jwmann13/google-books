@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Book = require("./Book");
+const User = require("./User");
 
 mongoose.Promise = global.Promise;
 
@@ -12,5 +13,6 @@ mongoose
 
 module.exports = {
   dbConnection: mongoose.connection,
-  Book
+  Book,
+  User
 };

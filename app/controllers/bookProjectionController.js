@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-const API_KEY = process.env.GOOGLE_API_KEY
+const API_KEY = process.env.GOOGLE_API_KEY;
 
 getFromAPI = (req, res) => {
   const { q, author } = req.query;
@@ -13,7 +13,6 @@ getFromAPI = (req, res) => {
   axios
     .get(queryStr)
     .then(response => {
-      // console.log(response.data.items.map(projectBook));
       res.json(response.data.items.map(projectBook));
     })
     .catch(err => res.json(err));

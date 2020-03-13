@@ -1,14 +1,15 @@
 const express = require("express");
-const PORT = process.env.PORT || 6200;
-const app = express();
-
+const morgan = require("morgan");
 const session = require("express-session");
-const { dbConnection } = require("./models");
+const cookieParser = require("cookie-parser");
 const MongoStore = require("connect-mongo")(session);
 
-const routes = require("./routes");
+const app = express();
 
-const morgan = require("morgan"); 
+const { dbConnection } = require("./models");
+const routes = require("./routes");
+const auth = require("./lib/passport")
+const PORT = process.env.PORT || 6200;
 
 app.use(morgan("dev"));
 
@@ -19,6 +20,7 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("public"));
 }
+app.use(cookieParser());
 
 app.use(session({
   secret: "cor-blimey",
@@ -26,6 +28,10 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+
+app.use(auth.initialize);
+app.use(auth.session);
+app.use(auth.setUser)
 
 app.use(routes)
 
