@@ -17,7 +17,7 @@ function ReadMore(props) {
   return (
     <p className="card-body">
       {text}
-      <button onClick={() => setExpanded(!expanded)} className="readmore card-link">
+      <button onClick={() => setExpanded(!expanded)} className="readmore btn btn-link card-link">
         {expanded ? "read less" : "read more"}
       </button>
     </p>
