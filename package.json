@@ -4,7 +4,8 @@
   "description": "## About This Boilerplate",
   "main": "index.js",
   "scripts": {
-    "install": "cd ./app && npm i && cd ../client && npm i"
+    "install": "cd ./app && npm i && cd ../client && npm i",
+    "audit": "cd ./app && npm audit && cd ../client && npm audit"
   },
   "repository": {
     "type": "git",
