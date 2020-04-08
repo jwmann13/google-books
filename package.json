@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/jwmann13/google-books/issues"
   },
-  "homepage": "https://github.com/jwmann13/google-books#readme"
+  "homepage": "https://github.com/jwmann13/google-books#readme",
+  "dependencies": {}
 }

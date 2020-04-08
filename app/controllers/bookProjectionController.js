@@ -1,34 +1,48 @@
 const axios = require("axios").default;
 const API_KEY = process.env.GOOGLE_API_KEY;
 
-getFromAPI = (req, res) => {
-  const { q, author } = req.query;
-  let queryStr = "";
+getFromAPI = async (req, res) => {
+  try {
+    const { q, author, title, publisher, subject, iter } = req.query;
+    let options = "";
 
-  if (author)
-    queryStr = `https://www.googleapis.com/books/v1/volumes?q=${q}+inauthor:${author}&key=${API_KEY}`;
-  else
-    queryStr = `https://www.googleapis.com/books/v1/volumes?q=${q}&key=${API_KEY}`;
+    if (author) options += `+inauthor:${author}`;
+    if (title) options += `+intitle:${title}`;
+    if (publisher) options += `+inpublisher:${publisher}`;
+    if (subject) options += `+subject:${subject}`;
 
-  axios
-    .get(queryStr)
-    .then(response => {
-      res.json(response.data.items.map(projectBook));
-    })
-    .catch(err => res.json(err));
+    let queryStr = `https://www.googleapis.com/books/v1/volumes?q=${q}${options}&maxResults=12&startIndex=${iter}&key=${API_KEY}`;
+
+    const response = await axios.get(queryStr);
+    const bookArray = response.data.items.map(projectBook);
+
+    if (bookArray) {
+      res.json(bookArray);
+    } else {
+      res.json(null);
+    }
+  } catch (err) {
+    res.json(err);
+  }
 };
 
 projectBook = item => {
-  const { volumeInfo } = item;
+  const { volumeInfo, id } = item;
   const { title, authors, description, imageLinks, previewLink } = volumeInfo;
+
   const newBook = {
+    id: id,
     title: title,
     authors: authors,
     description: description,
     image: imageLinks.thumbnail,
     link: previewLink
   };
-  return newBook;
+  if (newBook) {
+    return newBook;
+  } else {
+    return;
+  }
 };
 
 module.exports = getFromAPI;

@@ -1,36 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
+import { Book } from "../index";
 
-import { Book, SearchBar } from "../index";
-
-function BookContainer() {
-  const [books, setBooks] = useState([]);
-
+function BookContainer(props) {
   let bookCards = [];
-  if (books !== []) {
-    bookCards = books.map((b, i) => {
+  if (props.books) {
+    bookCards = props.books.map((b, i) => {
       if (i % 3 === 2) {
         return (
-          <>
-            <Book>{b}</Book>
+          <React.Fragment key={b.id}>
+            <Book key={b.id}>{b}</Book>
             <div className="w-100"></div>
-          </>
+          </React.Fragment>
         );
       } else {
-        return <Book>{b}</Book>;
+        return <Book key={b.id}>{b}</Book>;
       }
     });
-  } else {
-    bookCards = [];
   }
 
-  return (
-    <div className="container">
-      <div className="row">
-        <SearchBar setBooks={setBooks} />
-      </div>
-      <div className="card-group">{bookCards}</div>
-    </div>
-  );
+  return <div className="card-group">{bookCards}</div>;
 }
 
 export default BookContainer;
