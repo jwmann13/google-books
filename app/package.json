@@ -10,16 +10,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": ">=6.26.0",
-    "babel-preset-env": ">=1.7.0",
-    "babel-preset-stage-0": ">=6.24.1",
     "concurrently": ">=5.1.0",
     "nodemon": ">=2.0.3"
   },
   "dependencies": {
     "axios": ">=0.19.2",
     "bcryptjs": ">=2.4.3",
-    "braces": ">=3.0.2",
     "connect-mongo": ">=3.2.0",
     "cookie-parser": ">=1.4.5",
     "email-validator": ">=2.0.4",
