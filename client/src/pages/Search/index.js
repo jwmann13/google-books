@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
-import { BookContainer, SearchBar, AdvancedSearch } from "../../components";
+import { Book, SearchBar, AdvancedSearch } from "../../components";
 
 function Search() {
   const [query, setQuery] = useState({
@@ -8,14 +8,13 @@ function Search() {
     author: "",
     title: "",
     publisher: "",
-    subject: "",
-    iter: 0
+    subject: ""
   });
+  const [iter] = useState(0);
   const [books, setBooks] = useState(null);
   const [searchBool, setSearchBool] = useState(false);
 
   function changeQuery(e) {
-    console.log(query);
     setQuery({
       ...query,
       [e.target.name]: e.target.value
@@ -25,13 +24,40 @@ function Search() {
   function getSearch(e) {
     e.preventDefault();
 
-    API.getSearch(query)
+    API.getSearch(query, iter)
       .then(response => {
-        console.log(response.data);
         setBooks(response.data);
       })
       .catch(err => console.log(err));
   }
+
+  function BookContainer() {
+    console.log(books)
+    if (Object.keys(books) === 0) {
+      return (<p>No books match!</p>)
+    } else if (books) {
+      return books.map((b, i) => {
+        if (i % 3 === 2) {
+          return (
+            <React.Fragment key={b.id}>
+              <Book key={b.id}>{b}</Book>
+              <div className="w-100"></div>
+            </React.Fragment>
+          );
+        } else {
+          return <Book key={b.id}>{b}</Book>;
+        }
+      });
+    }
+  }
+
+//  useEffect(() => {
+//     API.getSearch(query, iter)
+//       .then(response => {
+//         setBooks(response.data);
+//       })
+//       .catch(err => console.log(err));
+//   }, [query, iter]);
 
   return (
     <div className="container">
@@ -53,7 +79,7 @@ function Search() {
           {searchBool ? "Close" : "Advanced Search"}
         </button>
       </div>
-      <BookContainer books={books} />
+      {books ? BookContainer() : (<p>Search for something</p>)}
     </div>
   );
 }

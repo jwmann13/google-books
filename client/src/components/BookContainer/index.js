@@ -3,7 +3,12 @@ import { Book } from "../index";
 
 function BookContainer(props) {
   let bookCards = [];
-  if (props.books) {
+
+  if (!props.book) {
+    bookCards = (<p>Search for something</p>)
+  } else if (Object.keys(props.books) === 0) {
+    bookCards = (<p>No books match!</p>)
+  } else if(props.books) {
     bookCards = props.books.map((b, i) => {
       if (i % 3 === 2) {
         return (
@@ -17,8 +22,9 @@ function BookContainer(props) {
       }
     });
   }
+  console.log(bookCards)
 
-  return <div className="card-group">{bookCards}</div>;
+  return bookCards
 }
 
 export default BookContainer;
