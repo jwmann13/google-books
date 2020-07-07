@@ -9,7 +9,7 @@ const app = express();
 const { dbConnection } = require("./models");
 const routes = require("./routes");
 const auth = require("./lib/passport")
-const PORT = process.env.PORT || 6200;
+const PORT = process.env.PORT || 4000;
 
 app.use(morgan("dev"));
 
