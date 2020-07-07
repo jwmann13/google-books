@@ -1,0 +1,58 @@
+version: "3"
+services:
+    backend:
+        build:
+            context: ./app
+            dockerfile: Dockerfile-dev
+        expose:
+            - 4000
+        ports:
+            - "4000:4000"
+        image: jwmann13/google-books-server:dev
+        container_name: google-books-backend
+        volumes:
+            - ./app/src:/app/server/src/
+        command: nodemon -L src/server.js
+        links:
+            - db
+        env_file:
+            - .env
+        environment: 
+            - MONGO_URI=mongodb://db/googleBooks
+            - PORT=4000
+            - JWT_SECRET=secretsecret
+            - JWT_EXPIRY=30d
+            - DEBUG=worker:*
+            - MORGAN=combined
+            - NODE_ENV=development
+        restart: always
+    frontend:
+        build:
+            context: ./client
+            dockerfile: Dockerfile-dev
+        environment:
+            - REACT_APP_PORT=3000
+            - CHOKIDAR_USEPOLLING=true
+        image: jwmann13/google-books-client:dev
+        container_name: google-books-frontend
+        expose:
+            - 3000
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./client/src/:/app/client/src
+            - ./client/public/:/app/client/public
+        links:
+            - backend
+        command: npm run start
+        restart: always
+    db:
+        image: mongo:latest
+        container_name: google-books-db
+        restart: unless-stopped
+        ports:
+            - "27017:27017"
+        volumes:
+            - mongodb-data-volume/:/data/db
+volumes:
+    mongodb-data-volume:
